@@ -1,0 +1,50 @@
+﻿@model refwebportal.GamePlayer
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>GamePlayer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IsCaptain)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsCaptain)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SquadNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SquadNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Game.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Game.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Player.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Player.FirstName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

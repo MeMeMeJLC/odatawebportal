@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FROdataModelStoreContainer" CdmEntityContainer="FROdataEntities1">
+    <EntitySetMapping Name="GamePlayers">
+      <EntityTypeMapping TypeName="FROdataModel.GamePlayer">
+        <MappingFragment StoreEntitySet="GamePlayers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PlayerId" ColumnName="PlayerId" />
+          <ScalarProperty Name="GameId" ColumnName="GameId" />
+          <ScalarProperty Name="IsCaptain" ColumnName="IsCaptain" />
+          <ScalarProperty Name="SquadNumber" ColumnName="SquadNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Games">
+      <EntityTypeMapping TypeName="FROdataModel.Game">
+        <MappingFragment StoreEntitySet="Games">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="GameDateTime" ColumnName="GameDateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GameTeams">
+      <EntityTypeMapping TypeName="FROdataModel.GameTeam">
+        <MappingFragment StoreEntitySet="GameTeams">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GameId" ColumnName="GameId" />
+          <ScalarProperty Name="TeamId" ColumnName="TeamId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Goals">
+      <EntityTypeMapping TypeName="FROdataModel.Goal">
+        <MappingFragment StoreEntitySet="Goals">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GamePlayerId" ColumnName="GamePlayerId" />
+          <ScalarProperty Name="GoalTime" ColumnName="GoalTime" />
+          <ScalarProperty Name="IsOwnGoal" ColumnName="IsOwnGoal" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Penalties">
+      <EntityTypeMapping TypeName="FROdataModel.Penalty">
+        <MappingFragment StoreEntitySet="Penalties">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GamePlayerId" ColumnName="GamePlayerId" />
+          <ScalarProperty Name="PenaltyTypeId" ColumnName="PenaltyTypeId" />
+          <ScalarProperty Name="PenaltyTime" ColumnName="PenaltyTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PenaltyTypes">
+      <EntityTypeMapping TypeName="FROdataModel.PenaltyType">
+        <MappingFragment StoreEntitySet="PenaltyTypes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Players">
+      <EntityTypeMapping TypeName="FROdataModel.Player">
+        <MappingFragment StoreEntitySet="Players">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="TeamId" ColumnName="TeamId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Substitutions">
+      <EntityTypeMapping TypeName="FROdataModel.Substitution">
+        <MappingFragment StoreEntitySet="Substitutions">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GamePlayerGoingOffTheFieldId" ColumnName="GamePlayerGoingOffTheFieldId" />
+          <ScalarProperty Name="GamePlayerGoingOnTheFieldId" ColumnName="GamePlayerGoingOnTheFieldId" />
+          <ScalarProperty Name="SubstitutionTime" ColumnName="SubstitutionTime" />
+          <ScalarProperty Name="GamePlayer_Id" ColumnName="GamePlayer_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Teams">
+      <EntityTypeMapping TypeName="FROdataModel.Team">
+        <MappingFragment StoreEntitySet="Teams">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Colour" ColumnName="Colour" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="PenaltyTypePenalties" TypeName="FROdataModel.PenaltyTypePenalties" StoreEntitySet="PenaltyTypePenalties">
+      <EndProperty Name="Penalties">
+        <ScalarProperty Name="Id" ColumnName="Penalty_Id" />
+      </EndProperty>
+      <EndProperty Name="PenaltyTypes">
+        <ScalarProperty Name="Id" ColumnName="PenaltyType_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,50 @@
+﻿@model refwebportal.Substitution
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Substitution</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SubstitutionTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubstitutionTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GamePlayer.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GamePlayer.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GamePlayer1.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GamePlayer1.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GamePlayer2.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GamePlayer2.Id)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

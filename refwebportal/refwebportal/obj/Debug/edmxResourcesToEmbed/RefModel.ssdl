@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FROdataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="GamePlayers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PlayerId" Type="int" Nullable="false" />
+    <Property Name="GameId" Type="int" Nullable="false" />
+    <Property Name="IsCaptain" Type="bit" Nullable="false" />
+    <Property Name="SquadNumber" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Games">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="GameDateTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="GameTeams">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GameId" Type="int" Nullable="false" />
+    <Property Name="TeamId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Goals">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GamePlayerId" Type="int" Nullable="false" />
+    <Property Name="GoalTime" Type="time" Precision="7" Nullable="false" />
+    <Property Name="IsOwnGoal" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Penalties">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GamePlayerId" Type="int" Nullable="false" />
+    <Property Name="PenaltyTypeId" Type="int" Nullable="false" />
+    <Property Name="PenaltyTime" Type="time" Precision="7" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PenaltyTypePenalties">
+    <Key>
+      <PropertyRef Name="PenaltyType_Id" />
+      <PropertyRef Name="Penalty_Id" />
+    </Key>
+    <Property Name="PenaltyType_Id" Type="int" Nullable="false" />
+    <Property Name="Penalty_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PenaltyTypes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Players">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" />
+    <Property Name="LastName" Type="nvarchar(max)" />
+    <Property Name="TeamId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Substitutions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GamePlayerGoingOffTheFieldId" Type="int" Nullable="false" />
+    <Property Name="GamePlayerGoingOnTheFieldId" Type="int" Nullable="false" />
+    <Property Name="SubstitutionTime" Type="time" Precision="7" Nullable="false" />
+    <Property Name="GamePlayer_Id" Type="int" />
+  </EntityType>
+  <EntityType Name="Teams">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="Colour" Type="nvarchar(max)" />
+  </EntityType>
+  <Association Name="FK_dbo_GamePlayers_dbo_Games_GameId">
+    <End Role="Games" Type="Self.Games" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="GamePlayers" Type="Self.GamePlayers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Games">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GamePlayers">
+        <PropertyRef Name="GameId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_GamePlayers_dbo_Players_PlayerId">
+    <End Role="Players" Type="Self.Players" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="GamePlayers" Type="Self.GamePlayers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Players">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GamePlayers">
+        <PropertyRef Name="PlayerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_GameTeams_dbo_Games_GameId">
+    <End Role="Games" Type="Self.Games" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="GameTeams" Type="Self.GameTeams" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Games">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GameTeams">
+        <PropertyRef Name="GameId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_GameTeams_dbo_Teams_TeamId">
+    <End Role="Teams" Type="Self.Teams" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="GameTeams" Type="Self.GameTeams" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teams">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GameTeams">
+        <PropertyRef Name="TeamId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Goals_dbo_GamePlayers_GamePlayerId">
+    <End Role="GamePlayers" Type="Self.GamePlayers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Goals" Type="Self.Goals" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GamePlayers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Goals">
+        <PropertyRef Name="GamePlayerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Penalties_dbo_GamePlayers_GamePlayerId">
+    <End Role="GamePlayers" Type="Self.GamePlayers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Penalties" Type="Self.Penalties" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GamePlayers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Penalties">
+        <PropertyRef Name="GamePlayerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_PenaltyTypePenalties_dbo_Penalties_Penalty_Id">
+    <End Role="Penalties" Type="Self.Penalties" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PenaltyTypePenalties" Type="Self.PenaltyTypePenalties" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Penalties">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PenaltyTypePenalties">
+        <PropertyRef Name="Penalty_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_PenaltyTypePenalties_dbo_PenaltyTypes_PenaltyType_Id">
+    <End Role="PenaltyTypes" Type="Self.PenaltyTypes" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PenaltyTypePenalties" Type="Self.PenaltyTypePenalties" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PenaltyTypes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PenaltyTypePenalties">
+        <PropertyRef Name="PenaltyType_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Players_dbo_Teams_TeamId">
+    <End Role="Teams" Type="Self.Teams" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Players" Type="Self.Players" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teams">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Players">
+        <PropertyRef Name="TeamId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Substitutions_dbo_GamePlayers_GamePlayer_Id">
+    <End Role="GamePlayers" Type="Self.GamePlayers" Multiplicity="0..1" />
+    <End Role="Substitutions" Type="Self.Substitutions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GamePlayers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Substitutions">
+        <PropertyRef Name="GamePlayer_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Substitutions_dbo_GamePlayers_GamePlayerGoingOffTheFieldId">
+    <End Role="GamePlayers" Type="Self.GamePlayers" Multiplicity="1" />
+    <End Role="Substitutions" Type="Self.Substitutions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GamePlayers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Substitutions">
+        <PropertyRef Name="GamePlayerGoingOffTheFieldId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Substitutions_dbo_GamePlayers_GamePlayerGoingOnTheFieldId">
+    <End Role="GamePlayers" Type="Self.GamePlayers" Multiplicity="1" />
+    <End Role="Substitutions" Type="Self.Substitutions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GamePlayers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Substitutions">
+        <PropertyRef Name="GamePlayerGoingOnTheFieldId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FROdataModelStoreContainer">
+    <EntitySet Name="GamePlayers" EntityType="Self.GamePlayers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Games" EntityType="Self.Games" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GameTeams" EntityType="Self.GameTeams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Goals" EntityType="Self.Goals" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Penalties" EntityType="Self.Penalties" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PenaltyTypePenalties" EntityType="Self.PenaltyTypePenalties" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PenaltyTypes" EntityType="Self.PenaltyTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Players" EntityType="Self.Players" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Substitutions" EntityType="Self.Substitutions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Teams" EntityType="Self.Teams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_dbo_GamePlayers_dbo_Games_GameId" Association="Self.FK_dbo_GamePlayers_dbo_Games_GameId">
+      <End Role="Games" EntitySet="Games" />
+      <End Role="GamePlayers" EntitySet="GamePlayers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_GamePlayers_dbo_Players_PlayerId" Association="Self.FK_dbo_GamePlayers_dbo_Players_PlayerId">
+      <End Role="Players" EntitySet="Players" />
+      <End Role="GamePlayers" EntitySet="GamePlayers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_GameTeams_dbo_Games_GameId" Association="Self.FK_dbo_GameTeams_dbo_Games_GameId">
+      <End Role="Games" EntitySet="Games" />
+      <End Role="GameTeams" EntitySet="GameTeams" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_GameTeams_dbo_Teams_TeamId" Association="Self.FK_dbo_GameTeams_dbo_Teams_TeamId">
+      <End Role="Teams" EntitySet="Teams" />
+      <End Role="GameTeams" EntitySet="GameTeams" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Goals_dbo_GamePlayers_GamePlayerId" Association="Self.FK_dbo_Goals_dbo_GamePlayers_GamePlayerId">
+      <End Role="GamePlayers" EntitySet="GamePlayers" />
+      <End Role="Goals" EntitySet="Goals" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Penalties_dbo_GamePlayers_GamePlayerId" Association="Self.FK_dbo_Penalties_dbo_GamePlayers_GamePlayerId">
+      <End Role="GamePlayers" EntitySet="GamePlayers" />
+      <End Role="Penalties" EntitySet="Penalties" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_PenaltyTypePenalties_dbo_Penalties_Penalty_Id" Association="Self.FK_dbo_PenaltyTypePenalties_dbo_Penalties_Penalty_Id">
+      <End Role="Penalties" EntitySet="Penalties" />
+      <End Role="PenaltyTypePenalties" EntitySet="PenaltyTypePenalties" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_PenaltyTypePenalties_dbo_PenaltyTypes_PenaltyType_Id" Association="Self.FK_dbo_PenaltyTypePenalties_dbo_PenaltyTypes_PenaltyType_Id">
+      <End Role="PenaltyTypes" EntitySet="PenaltyTypes" />
+      <End Role="PenaltyTypePenalties" EntitySet="PenaltyTypePenalties" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Players_dbo_Teams_TeamId" Association="Self.FK_dbo_Players_dbo_Teams_TeamId">
+      <End Role="Teams" EntitySet="Teams" />
+      <End Role="Players" EntitySet="Players" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Substitutions_dbo_GamePlayers_GamePlayer_Id" Association="Self.FK_dbo_Substitutions_dbo_GamePlayers_GamePlayer_Id">
+      <End Role="GamePlayers" EntitySet="GamePlayers" />
+      <End Role="Substitutions" EntitySet="Substitutions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Substitutions_dbo_GamePlayers_GamePlayerGoingOffTheFieldId" Association="Self.FK_dbo_Substitutions_dbo_GamePlayers_GamePlayerGoingOffTheFieldId">
+      <End Role="GamePlayers" EntitySet="GamePlayers" />
+      <End Role="Substitutions" EntitySet="Substitutions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Substitutions_dbo_GamePlayers_GamePlayerGoingOnTheFieldId" Association="Self.FK_dbo_Substitutions_dbo_GamePlayers_GamePlayerGoingOnTheFieldId">
+      <End Role="GamePlayers" EntitySet="GamePlayers" />
+      <End Role="Substitutions" EntitySet="Substitutions" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

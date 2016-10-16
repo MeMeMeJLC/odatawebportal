@@ -1,0 +1,56 @@
+﻿@model refwebportal.Substitution
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Substitution</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SubstitutionTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubstitutionTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GamePlayer.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GamePlayer.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GamePlayer1.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GamePlayer1.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GamePlayer2.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GamePlayer2.Id)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
