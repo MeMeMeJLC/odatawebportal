@@ -50,13 +50,21 @@ namespace refwebportal.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,GameId,TeamId")] GameTeam gameTeam)
+        public async Task<ActionResult> Create([Bind(Include = "Game.Description,Team.Name")] GameTeam gameTeam)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.GameTeams.Add(gameTeam);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.GameTeams.Add(gameTeam);
+                    await db.SaveChangesAsync();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (DataException /* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
 
             ViewBag.GameId = new SelectList(db.Games, "Id", "Description", gameTeam.GameId);
@@ -86,7 +94,7 @@ namespace refwebportal.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,GameId,TeamId")] GameTeam gameTeam)
+        public async Task<ActionResult> Edit([Bind(Include = "Game.Id,Team.Id")] GameTeam gameTeam)
         {
             if (ModelState.IsValid)
             {
@@ -100,11 +108,15 @@ namespace refwebportal.Controllers
         }
 
         // GET: GameTeam/Delete/5
-        public async Task<ActionResult> Delete(int? id)
+        public async Task<ActionResult> Delete(int? id, bool? saveChangesError = false)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewBag.ErrorMessage = "Delete failed. Try again, and if the problem persists see your system administrator.";
             }
             GameTeam gameTeam = await db.GameTeams.FindAsync(id);
             if (gameTeam == null)
@@ -119,10 +131,18 @@ namespace refwebportal.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            GameTeam gameTeam = await db.GameTeams.FindAsync(id);
-            db.GameTeams.Remove(gameTeam);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            try
+            {
+                GameTeam gameTeam = await db.GameTeams.FindAsync(id);
+                db.GameTeams.Remove(gameTeam);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            catch (DataException/* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                return RedirectToAction("Delete", new { id = id, saveChangesError = true });
+            }
         }
 
         protected override void Dispose(bool disposing)

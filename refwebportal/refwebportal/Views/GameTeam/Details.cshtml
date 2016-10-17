@@ -25,10 +25,48 @@
         <dd>
             @Html.DisplayFor(model => model.Team.Name)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Game.GamePlayers)
+        </dt>
+        <dd>
+            @Html.ActionLink("Assign New Game Player", "../GamePlayer/Create")
 
+
+            <table class="table">
+                <tr>
+                    <th>Squad Number</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Is Captain?</th>
+                </tr>
+                @foreach (var item in Model.Game.GamePlayers)
+                {
+                    if (item.Player.TeamId == Model.Team.Id)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SquadNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Player.FirstName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Player.LastName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IsCaptain)
+                            </td>
+                        </tr>
+                      }
+                    }
+            </table>
+        </dd>
     </dl>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index") | 
+    @Html.ActionLink("Back to Game Details", "../Game/Details", new { id = Model.GameId })
+
+
 </p>
