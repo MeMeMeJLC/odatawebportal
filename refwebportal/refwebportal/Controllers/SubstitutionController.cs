@@ -13,7 +13,7 @@ namespace refwebportal.Controllers
 {
     public class SubstitutionController : Controller
     {
-        private FROdataEntities1 db = new FROdataEntities1();
+        private FROdataEntities3 db = new FROdataEntities3();
 
         // GET: Substitution
         public async Task<ActionResult> Index()

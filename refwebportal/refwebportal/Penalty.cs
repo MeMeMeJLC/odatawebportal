@@ -14,19 +14,12 @@ namespace refwebportal
     
     public partial class Penalty
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Penalty()
-        {
-            this.PenaltyTypes = new HashSet<PenaltyType>();
-        }
-    
         public int Id { get; set; }
         public int GamePlayerId { get; set; }
         public int PenaltyTypeId { get; set; }
         public System.TimeSpan PenaltyTime { get; set; }
     
         public virtual GamePlayer GamePlayer { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PenaltyType> PenaltyTypes { get; set; }
+        public virtual PenaltyType PenaltyType { get; set; }
     }
 }

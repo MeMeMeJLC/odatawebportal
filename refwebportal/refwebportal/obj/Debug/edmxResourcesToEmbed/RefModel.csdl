@@ -56,7 +56,7 @@
     <Property Name="PenaltyTypeId" Type="Int32" Nullable="false" />
     <Property Name="PenaltyTime" Type="Time" Nullable="false" Precision="7" />
     <NavigationProperty Name="GamePlayer" Relationship="Self.FK_dbo_Penalties_dbo_GamePlayers_GamePlayerId" FromRole="Penalties" ToRole="GamePlayers" />
-    <NavigationProperty Name="PenaltyTypes" Relationship="Self.PenaltyTypePenalties" FromRole="Penalties" ToRole="PenaltyTypes" />
+    <NavigationProperty Name="PenaltyType" Relationship="Self.FK_dbo_Penalties_dbo_PenaltyTypes_PenaltyTypeId" FromRole="Penalties" ToRole="PenaltyTypes" />
   </EntityType>
   <EntityType Name="PenaltyType">
     <Key>
@@ -65,7 +65,7 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Penalties" Relationship="Self.PenaltyTypePenalties" FromRole="PenaltyTypes" ToRole="Penalties" />
+    <NavigationProperty Name="Penalties" Relationship="Self.FK_dbo_Penalties_dbo_PenaltyTypes_PenaltyTypeId" FromRole="PenaltyTypes" ToRole="Penalties" />
   </EntityType>
   <EntityType Name="Player">
     <Key>
@@ -221,6 +221,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_dbo_Penalties_dbo_PenaltyTypes_PenaltyTypeId">
+    <End Role="PenaltyTypes" Type="Self.PenaltyType" Multiplicity="1" />
+    <End Role="Penalties" Type="Self.Penalty" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PenaltyTypes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Penalties">
+        <PropertyRef Name="PenaltyTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_dbo_Players_dbo_Teams_TeamId">
     <End Role="Teams" Type="Self.Team" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -235,11 +247,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="PenaltyTypePenalties">
-    <End Role="Penalties" Type="Self.Penalty" Multiplicity="*" />
-    <End Role="PenaltyTypes" Type="Self.PenaltyType" Multiplicity="*" />
-  </Association>
-  <EntityContainer Name="FROdataEntities1" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="FROdataEntities3" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="GamePlayers" EntityType="Self.GamePlayer" />
     <EntitySet Name="Games" EntityType="Self.Game" />
     <EntitySet Name="GameTeams" EntityType="Self.GameTeam" />
@@ -285,13 +293,13 @@
       <End Role="Teams" EntitySet="Teams" />
       <End Role="GameTeams" EntitySet="GameTeams" />
     </AssociationSet>
+    <AssociationSet Name="FK_dbo_Penalties_dbo_PenaltyTypes_PenaltyTypeId" Association="Self.FK_dbo_Penalties_dbo_PenaltyTypes_PenaltyTypeId">
+      <End Role="PenaltyTypes" EntitySet="PenaltyTypes" />
+      <End Role="Penalties" EntitySet="Penalties" />
+    </AssociationSet>
     <AssociationSet Name="FK_dbo_Players_dbo_Teams_TeamId" Association="Self.FK_dbo_Players_dbo_Teams_TeamId">
       <End Role="Teams" EntitySet="Teams" />
       <End Role="Players" EntitySet="Players" />
-    </AssociationSet>
-    <AssociationSet Name="PenaltyTypePenalties" Association="Self.PenaltyTypePenalties">
-      <End Role="Penalties" EntitySet="Penalties" />
-      <End Role="PenaltyTypes" EntitySet="PenaltyTypes" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

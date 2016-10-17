@@ -13,10 +13,10 @@ namespace refwebportal
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class FROdataEntities1 : DbContext
+    public partial class FROdataEntities3 : DbContext
     {
-        public FROdataEntities1()
-            : base("name=FROdataEntities1")
+        public FROdataEntities3()
+            : base("name=FROdataEntities3")
         {
         }
     

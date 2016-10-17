@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="FROdataModelStoreContainer" CdmEntityContainer="FROdataEntities1">
+  <EntityContainerMapping StorageEntityContainer="FROdataModelStoreContainer" CdmEntityContainer="FROdataEntities3">
     <EntitySetMapping Name="GamePlayers">
       <EntityTypeMapping TypeName="FROdataModel.GamePlayer">
         <MappingFragment StoreEntitySet="GamePlayers">
@@ -89,13 +89,5 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="PenaltyTypePenalties" TypeName="FROdataModel.PenaltyTypePenalties" StoreEntitySet="PenaltyTypePenalties">
-      <EndProperty Name="Penalties">
-        <ScalarProperty Name="Id" ColumnName="Penalty_Id" />
-      </EndProperty>
-      <EndProperty Name="PenaltyTypes">
-        <ScalarProperty Name="Id" ColumnName="PenaltyType_Id" />
-      </EndProperty>
-    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

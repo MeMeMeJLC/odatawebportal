@@ -13,7 +13,7 @@ namespace refwebportal.Controllers
 {
     public class GamePlayerController : Controller
     {
-        private FROdataEntities1 db = new FROdataEntities1();
+        private FROdataEntities3 db = new FROdataEntities3();
 
         // GET: GamePlayer
         public async Task<ActionResult> Index()

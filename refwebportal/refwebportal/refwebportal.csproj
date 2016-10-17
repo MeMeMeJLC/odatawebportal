@@ -386,11 +386,6 @@
     <Content Include="Views\Substitution\Details.cshtml" />
     <Content Include="Views\Substitution\Edit.cshtml" />
     <Content Include="Views\Substitution\Index.cshtml" />
-    <Content Include="Views\Penalty\Create.cshtml" />
-    <Content Include="Views\Penalty\Delete.cshtml" />
-    <Content Include="Views\Penalty\Details.cshtml" />
-    <Content Include="Views\Penalty\Edit.cshtml" />
-    <Content Include="Views\Penalty\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -4,15 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="668adc66d25a40439ea8ceb4f493f386" Name="Diagram1">
+      <Diagram DiagramId="48d8411079174662ba96788ebd017fd7" Name="Diagram1">
         <EntityTypeShape EntityType="FROdataModel.GamePlayer" Width="1.5" PointX="5.25" PointY="7.875" IsExpanded="true" />
         <EntityTypeShape EntityType="FROdataModel.Game" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
         <EntityTypeShape EntityType="FROdataModel.GameTeam" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="FROdataModel.Goal" Width="1.5" PointX="7.5" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="FROdataModel.Penalty" Width="1.5" PointX="7.5" PointY="8.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="FROdataModel.PenaltyType" Width="1.5" PointX="9.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FROdataModel.Goal" Width="1.5" PointX="7.5" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FROdataModel.Penalty" Width="1.5" PointX="10.5" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FROdataModel.PenaltyType" Width="1.5" PointX="8.25" PointY="9.625" IsExpanded="true" />
         <EntityTypeShape EntityType="FROdataModel.Player" Width="1.5" PointX="3" PointY="8.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="FROdataModel.Substitution" Width="1.5" PointX="7.5" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FROdataModel.Substitution" Width="1.5" PointX="7.5" PointY="12.625" IsExpanded="true" />
         <EntityTypeShape EntityType="FROdataModel.Team" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
         <AssociationConnector Association="FROdataModel.FK_dbo_GamePlayers_dbo_Games_GameId" ManuallyRouted="false" />
         <AssociationConnector Association="FROdataModel.FK_dbo_GamePlayers_dbo_Players_PlayerId" ManuallyRouted="false" />
@@ -23,8 +23,8 @@
         <AssociationConnector Association="FROdataModel.FK_dbo_Substitutions_dbo_GamePlayers_GamePlayerGoingOnTheFieldId" ManuallyRouted="false" />
         <AssociationConnector Association="FROdataModel.FK_dbo_GameTeams_dbo_Games_GameId" ManuallyRouted="false" />
         <AssociationConnector Association="FROdataModel.FK_dbo_GameTeams_dbo_Teams_TeamId" ManuallyRouted="false" />
+        <AssociationConnector Association="FROdataModel.FK_dbo_Penalties_dbo_PenaltyTypes_PenaltyTypeId" ManuallyRouted="false" />
         <AssociationConnector Association="FROdataModel.FK_dbo_Players_dbo_Teams_TeamId" ManuallyRouted="false" />
-        <AssociationConnector Association="FROdataModel.PenaltyTypePenalties" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

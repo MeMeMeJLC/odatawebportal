@@ -70,7 +70,8 @@
             <table class="table">
                 <tr>
                     <th>Penalty Time</th>
-                    <th>Penalty Details</th>
+                    <th>Penalty Code</th>
+                    <th>Penalty Description</th>
                 </tr>
                 @foreach (var item in Model.Penalties)
                 {
@@ -79,7 +80,10 @@
                             @Html.DisplayFor(modelItem => item.PenaltyTime)
                         </td>
                         <td>
-                            Need to fix database so access PenaltyTypes Try from home.
+                            @Html.DisplayFor(modelItem => item.PenaltyType.Code)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PenaltyType.Description)
                         </td>
                     </tr>
                 }
@@ -92,20 +96,20 @@
             <table class="table">
                 <tr>
                     <th>Substitution Time</th>
-                    <th>Sub Going Off Field *make sure correct*</th>
-                    <th>Sub Going On Field *make sure correct*</th>
+                    <th>Sub Going Off Field</th>
+                    <th>Sub Going On Field</th>
                 </tr>
-                @foreach (var item in Model.Substitutions)
+                @foreach (var item in Model.Substitutions1)
                 {
                     <tr>
                         <td>
                             @Html.DisplayFor(modelItem => item.SubstitutionTime)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.GamePlayer1.Player.FirstName + " " + item.GamePlayer1.Player.LastName)
+                            @Html.DisplayFor(modelItem => item.GamePlayer1.SquadNumber)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.GamePlayer2.Player.FirstName + " " + item.GamePlayer2.Player.LastName)
+                            @Html.DisplayFor(modelItem => item.GamePlayer2.SquadNumber )
                         </td>
                     </tr>
                 }

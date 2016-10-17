@@ -14,7 +14,7 @@ namespace refwebportal.Controllers
 {
     public class GameController : Controller
     {
-        private FROdataEntities1 db = new FROdataEntities1();
+        private FROdataEntities3 db = new FROdataEntities3();
 
         // GET: Game
         public async Task<ActionResult> Index(string sortOrder, string currentFilter, string searchString, int? page)
