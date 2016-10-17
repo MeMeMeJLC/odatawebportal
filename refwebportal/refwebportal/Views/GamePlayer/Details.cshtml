@@ -41,6 +41,76 @@
         <dd>
             @Html.DisplayFor(model => model.Player.FirstName)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Goals)
+        </dt>
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>Goal Time</th>
+                    <th>Is Own Goal?</th>
+                </tr>
+                @foreach (var item in Model.Goals)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.GoalTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IsOwnGoal)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Penalties)
+        </dt>
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>Penalty Time</th>
+                    <th>Penalty Details</th>
+                </tr>
+                @foreach (var item in Model.Penalties)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PenaltyTime)
+                        </td>
+                        <td>
+                            Need to fix database so access PenaltyTypes Try from home.
+                        </td>
+                    </tr>
+                }
+            </table>
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Substitutions)
+        </dt>
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>Substitution Time</th>
+                    <th>Sub Going Off Field *make sure correct*</th>
+                    <th>Sub Going On Field *make sure correct*</th>
+                </tr>
+                @foreach (var item in Model.Substitutions)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SubstitutionTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.GamePlayer1.Player.FirstName + " " + item.GamePlayer1.Player.LastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.GamePlayer2.Player.FirstName + " " + item.GamePlayer2.Player.LastName)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </dd>
     </dl>
 </div>
 <p>

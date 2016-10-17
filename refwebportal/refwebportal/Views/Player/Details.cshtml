@@ -27,7 +27,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Team.Name)
+            Team Name
         </dt>
 
         <dd>
@@ -38,5 +38,8 @@
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to Player List", "Index") | 
+    @Html.ActionLink("Back to Team Details", "../Team/Details", new { id = Model.TeamId })
+
+
 </p>
