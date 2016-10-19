@@ -34,5 +34,6 @@ namespace refwebportal
         public virtual DbSet<Player> Players { get; set; }
         public virtual DbSet<Substitution> Substitutions { get; set; }
         public virtual DbSet<Team> Teams { get; set; }
+
     }
 }

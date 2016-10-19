@@ -393,6 +393,11 @@
     <Content Include="Views\GameCard\Details.cshtml" />
     <Content Include="Views\GameCard\Edit.cshtml" />
     <Content Include="Views\GameCard\Index.cshtml" />
+    <Content Include="Views\GamePlayerCreate\Create.cshtml" />
+    <Content Include="Views\GamePlayerCreate\Delete.cshtml" />
+    <Content Include="Views\GamePlayerCreate\Details.cshtml" />
+    <Content Include="Views\GamePlayerCreate\Edit.cshtml" />
+    <Content Include="Views\GamePlayerCreate\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

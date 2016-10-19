@@ -11,7 +11,8 @@ namespace refwebportal
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Player
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -28,5 +29,14 @@ namespace refwebportal
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GamePlayer> GamePlayers { get; set; }
         public virtual Team Team { get; set; }
+
+        [Display(Name = "Full Name and Team")]
+        public string FullNameAndTeam
+        {
+            get
+            {
+                return LastName + ", " + FirstName +  " - " + Team.Name;
+            }
+        }
     }
 }

@@ -41,7 +41,7 @@ namespace refwebportal.Controllers
         public ActionResult Create()
         {
             ViewBag.GameId = new SelectList(db.Games, "Id", "Description");
-            ViewBag.PlayerId = new SelectList(db.Players, "Id", "FirstName");
+            ViewBag.PlayerId = new SelectList(db.Players, "Id", "FullNameAndTeam");
             return View();
         }
 
