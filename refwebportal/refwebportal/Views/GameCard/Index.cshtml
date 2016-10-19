@@ -62,7 +62,7 @@
             }
             <tr class="@selectedRow">
                 <td>
-                    @Html.ActionLink("Select", "Index", new { gameTeamID = item.Id })
+                    @Html.ActionLink("Select", "Index", new { gameTeamId = item.Id })
                 </td>
                 <td>
                     @item.Team.Name
@@ -74,5 +74,37 @@
             </tr>
         }
 
+    </table>
+}
+
+@if (Model.GamePlayers != null)
+{
+    <h3>
+        Game Players
+    </h3>
+    <table class="table">
+        <tr>
+            <th>Team</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Is Captain</th>
+        </tr>
+        @foreach (var item in Model.GamePlayers)
+        {
+            <tr>
+                <td>
+                    @item.Player.Team.Name
+                </td>
+                <td>
+                    @item.Player.FirstName
+                </td>
+                <td>
+                    @item.Player.LastName
+                </td>
+                <td>
+                    @item.IsCaptain
+                </td>
+            </tr>
+        }
     </table>
 }

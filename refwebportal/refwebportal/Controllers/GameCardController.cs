@@ -17,7 +17,7 @@ namespace refwebportal.Controllers
         private FROdataEntities3 db = new FROdataEntities3();
 
         // GET: GameCard
-        public ActionResult Index(int? id, int? gameTeamID)
+        public ActionResult Index(int? id, int? gameTeamId)
         {
             var viewModel = new GamesIndexData();
             viewModel.Games = db.Games
@@ -25,16 +25,16 @@ namespace refwebportal.Controllers
 
             if (id != null)
             {
-                ViewBag.GameID = id.Value;
+                ViewBag.GameId = id.Value;
                 viewModel.GameTeams = viewModel.Games.Where(
                     i => i.Id == id.Value).Single().GameTeams;
             }
 
-            if (gameTeamID != null)
+            if (gameTeamId != null)
             {
-                ViewBag.GameTeamID = gameTeamID.Value;
-                viewModel.GamePlayers = viewModel.Games.Where(
-                    x => x.Id == gameTeamID).Single().GamePlayers;
+                ViewBag.TeamId = gameTeamId.Value;
+                viewModel.GamePlayers = viewModel.GameTeams.Where(
+                    x => x.TeamId == gameTeamId).Single().Game.GamePlayers;
             }
 
             return View(viewModel);
