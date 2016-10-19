@@ -104,6 +104,9 @@
                 <td>
                     @item.IsCaptain
                 </td>
+                <td>
+                    @Html.ActionLink("Details", "../GamePlayer/Details", new { id = item.Id })
+                </td>
             </tr>
         }
     </table>

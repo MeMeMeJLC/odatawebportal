@@ -34,7 +34,7 @@ namespace refwebportal.Controllers
             {
                 ViewBag.TeamId = gameTeamId.Value;
                 viewModel.GamePlayers = viewModel.GameTeams.Where(
-                    x => x.TeamId == gameTeamId).Single().Game.GamePlayers;
+                    x => x.Id == gameTeamId).Single().Game.GamePlayers;
             }
 
             return View(viewModel);
