@@ -207,6 +207,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GameCardController.cs" />
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\GamePlayerController.cs" />
     <Compile Include="Controllers\GameTeamController.cs" />
@@ -234,6 +235,7 @@
       <DependentUpon>RefModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\GamesIndexData.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Penalty.cs">
@@ -386,6 +388,11 @@
     <Content Include="Views\Substitution\Details.cshtml" />
     <Content Include="Views\Substitution\Edit.cshtml" />
     <Content Include="Views\Substitution\Index.cshtml" />
+    <Content Include="Views\GameCard\Create.cshtml" />
+    <Content Include="Views\GameCard\Delete.cshtml" />
+    <Content Include="Views\GameCard\Details.cshtml" />
+    <Content Include="Views\GameCard\Edit.cshtml" />
+    <Content Include="Views\GameCard\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
