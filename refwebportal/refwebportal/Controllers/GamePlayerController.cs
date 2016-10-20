@@ -52,13 +52,24 @@ namespace refwebportal.Controllers
             return Json(games, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult GetTeams(int? intGameID)
+        public ActionResult GetTeamsForPara(int? intGameID)
         {
-            var teams = from b in db.GameTeams.Where(p => p.GameId == intGameID )
+            var teams = from b in db.GameTeams.Where(p => p.GameId == intGameID)
                         select new ViewTeam()
                         {
                             TeamName = b.Team.Name,
-                            Id = b.Id
+                            Id = b.Team.Id
+                        };
+            return Json(teams, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetTeams()
+        {
+            var teams = from b in db.GameTeams
+                        select new ViewTeam()
+                        {
+                            TeamName = b.Team.Name,
+                            Id = b.Team.Id
                         };
             return Json(teams, JsonRequestBehavior.AllowGet);
         }
@@ -101,7 +112,7 @@ namespace refwebportal.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.GameId = new SelectList(db.Games, "Id", "Description", gamePlayer.GameId);
-           // ViewBag.GameTeamId = new SelectList(db.GameTeams, "Id", "Team.Name", gamePlayer.GameTeamId);
+            ViewBag.GameTeamId = new SelectList(db.GameTeams, "Id", "Team.Name", gamePlayer.GameTeamId);
             ViewBag.PlayerId = new SelectList(db.Players, "Id", "FullName", gamePlayer.PlayerId);
             return View(gamePlayer);
         }

@@ -16,7 +16,7 @@
                 });
 
                 // Get a list of categories and a list of products of the first category.
-                $.getJSON('/GamePlayer/GetTeams', { intGameID: $('#game').val() }, function (data) {
+                $.getJSON('/GamePlayer/GetTeams', { intGameID: $('#hame').val() }, function (data) {
                     $.each(data, function () {
                         $('#team.form-control').append('<option value=' + this.Id + '>' + this.Id + " " + this.TeamName + '</option>');
                     });
@@ -35,10 +35,10 @@
                 // Dropdown list change event.
                 $('#game.form-control').change(function () {
                     $('#TeamId.form-control option').remove();
-                    $.getJSON('/GamePlayer/GetTeams', { intGameID: $('#game').val() }, function (data) {
+                    $.getJSON('/GamePlayer/GetTeamsForPara', { intGameID: $('#game').val() }, function (data) {
 
                         $.each(data, function () {
-                            $('#TeamId.form-control').append('<option value=' + this.Id + '>' + this.Id + " " + this.TeamName + '</option>');
+                            $('#gamemessage').append('<option value=' + this.Id + '>' + this.Id + " " + this.TeamName + '</option>');
                         });
                         window.alert("game changer");
 
@@ -46,18 +46,18 @@
                 });
 
                 $('#team.form-control').change(function () {
-                            $('#PlayerId.form-control option').remove();
-                            $.getJSON('/GamePlayer/GetPlayers', { intTeamID: $('#team').val() }, function (data) {
-                                $.each(data, function () {
-                                    $('#PlayerId.form-control').append('<option value=' + this.Id + '>' + this.LastName + ", " + this.FirstName + '</option>');
-                                });
-                                 window.alert("team changer");
-                            }).fail(function (jqXHR, textStatus, errorThrown) {
-                                alert('Error getting players 3!');
-                            });
+                    $('#PlayerId.form-control option').remove();
+                    $.getJSON('/GamePlayer/GetPlayers', { intTeamID: $('#team').val() }, function (data) {
+                        $.each(data, function () {
+                            $('#PlayerId.form-control').append('<option value=' + this.Id + '>' + this.LastName + ", " + this.FirstName + '</option>');
                         });
+                        window.alert("team changer");
+                    }).fail(function (jqXHR, textStatus, errorThrown) {
+                        alert('Error getting players 3!');
                     });
-                })
+                });
+            });
+        });
     </script>
 }
 
@@ -76,14 +76,14 @@
 
             <div class="col-md-10">
                 <select class="form-control" id="game"></select>
-
             </div>
         </div>
+        <p id="gamemessage"></p>
 
         <div class="form-group">
-            <label for="team" class="control-label col-md-2">Team</label>
+            <label for="GameTeamId" class="control-label col-md-2">Team</label>
             <div class="col-md-10">
-                <select class="form-control" id="team"></select> 
+                <select class="form-control" id="team"></select>
 
             </div>
         </div>
