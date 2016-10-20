@@ -35,5 +35,6 @@ namespace refwebportal
         public virtual DbSet<Substitution> Substitutions { get; set; }
         public virtual DbSet<Team> Teams { get; set; }
 
+        public System.Data.Entity.DbSet<refwebportal.Models.ViewPlayers> ViewPlayers { get; set; }
     }
 }

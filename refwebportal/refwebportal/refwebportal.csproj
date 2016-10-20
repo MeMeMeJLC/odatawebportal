@@ -219,6 +219,7 @@
     <Compile Include="Controllers\PlayerController.cs" />
     <Compile Include="Controllers\SubstitutionController.cs" />
     <Compile Include="Controllers\TeamController.cs" />
+    <Compile Include="Controllers\ViewPlayersController.cs" />
     <Compile Include="Game.cs">
       <DependentUpon>RefModel.tt</DependentUpon>
     </Compile>
@@ -400,6 +401,11 @@
     <Content Include="Views\GamePlayerCreate\Details.cshtml" />
     <Content Include="Views\GamePlayerCreate\Edit.cshtml" />
     <Content Include="Views\GamePlayerCreate\Index.cshtml" />
+    <Content Include="Views\ViewPlayers\Create.cshtml" />
+    <Content Include="Views\ViewPlayers\Delete.cshtml" />
+    <Content Include="Views\ViewPlayers\Details.cshtml" />
+    <Content Include="Views\ViewPlayers\Edit.cshtml" />
+    <Content Include="Views\ViewPlayers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

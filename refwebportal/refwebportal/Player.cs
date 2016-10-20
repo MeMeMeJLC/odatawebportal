@@ -31,11 +31,11 @@ namespace refwebportal
         public virtual Team Team { get; set; }
 
         [Display(Name = "Full Name and Team")]
-        public string FullNameAndTeam
+        public string FullName
         {
             get
             {
-                return LastName + ", " + FirstName +  " - " + Team.Name;
+                return LastName + ", " + FirstName;
             }
         }
     }

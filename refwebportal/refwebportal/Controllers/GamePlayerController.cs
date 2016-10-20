@@ -61,7 +61,8 @@ namespace refwebportal.Controllers
                               Id = b.Id,
                               FirstName = b.FirstName,
                               LastName = b.LastName,
-                              TeamId = b.TeamId,                              
+                              TeamId = b.TeamId,   
+                         
                           };
             //var players = db.Players.Where(p => p.TeamId == intTeamID);
             return Json(players, JsonRequestBehavior.AllowGet);
@@ -70,8 +71,10 @@ namespace refwebportal.Controllers
         // GET: GamePlayer/Create
         public ActionResult Create()
         {
+            var intTeamId = 1;
+
             ViewBag.GameId = new SelectList(db.Games, "Id", "Description");
-            ViewBag.PlayerId = new SelectList(db.Players, "Id", "FullNameAndTeam");
+            ViewBag.PlayerId = new SelectList(db.Players.Where(p => p.TeamId == intTeamId), "Id", "FullName");
             return View();
         }
 
@@ -82,6 +85,7 @@ namespace refwebportal.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "Id,PlayerId,GameId,IsCaptain,SquadNumber")] GamePlayer gamePlayer)
         {
+            
             if (ModelState.IsValid)
             {
                 db.GamePlayers.Add(gamePlayer);
@@ -90,7 +94,7 @@ namespace refwebportal.Controllers
             }
 
             ViewBag.GameId = new SelectList(db.Games, "Id", "Description", gamePlayer.GameId);
-            ViewBag.PlayerId = new SelectList(db.Players, "Id", "FirstName", gamePlayer.PlayerId);
+            ViewBag.PlayerId = new SelectList(db.Players, "Id", "FullName", gamePlayer.PlayerId);
             return View(gamePlayer);
         }
 
