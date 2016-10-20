@@ -8,6 +8,9 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using refwebportal;
+using Newtonsoft.Json;
+using System.Web.Helpers;
+using refwebportal.Models;
 
 namespace refwebportal.Controllers
 {
@@ -35,6 +38,33 @@ namespace refwebportal.Controllers
                 return HttpNotFound();
             }
             return View(gamePlayer);
+        }
+
+        public ActionResult GetTeams()
+        {
+            var teams = from b in db.Teams
+                        select new ViewTeam()
+                        {
+                            TeamName = b.Name,
+                            Id = b.Id
+                        };
+
+            return Json(teams, JsonRequestBehavior.AllowGet);
+
+        }
+
+        public ActionResult GetPlayers(int? intTeamID)
+        {
+            var players = from b in db.Players.Where(p => p.TeamId == intTeamID)
+                          select new ViewPlayers()
+                          {
+                              Id = b.Id,
+                              FirstName = b.FirstName,
+                              LastName = b.LastName,
+                              TeamId = b.TeamId,                              
+                          };
+            //var players = db.Players.Where(p => p.TeamId == intTeamID);
+            return Json(players, JsonRequestBehavior.AllowGet);
         }
 
         // GET: GamePlayer/Create

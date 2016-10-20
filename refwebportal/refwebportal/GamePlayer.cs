@@ -31,6 +31,7 @@ namespace refwebportal
         public int SquadNumber { get; set; }
     
         public virtual Game Game { get; set; }
+        //public virtual Team Team { get; set; }
         public virtual Player Player { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Goal> Goals { get; set; }

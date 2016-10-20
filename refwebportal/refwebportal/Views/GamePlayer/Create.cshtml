@@ -15,6 +15,22 @@
         <h4>GamePlayer</h4>
         <hr />
 
+        <div>
+            <label for="team">Team</label>
+            <select id="team"></select>
+            <label for="player">Player</label>
+            <select id="player"></select>
+        </div>
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.PlayerId, "PlayerId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("PlayerId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PlayerId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.PlayerId, "PlayerId", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -63,5 +79,43 @@
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Get a list of categories and a list of products of the first category.
+            $.getJSON('/GamePlayer/GetTeams', null, function (data) {
+                $.each(data, function () {
+                    $('#team').append('<option value=' +
+                      this.Id + '>' + this.TeamName + '</option>');
+                });
+                $.getJSON('/GamePlayer/GetPlayers', { intTeamID: $('#team').val() }, function (data) {
+                    $.each(data, function () {
+                        $('#player').append('<option value=' +
+                          this.Id + '>' + this.LastName + ", " + this.FirstName + '</option>');
+                    });
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    alert('Error getting players 1!');
+                });
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                alert('Error getting teams 2!');
+            });
+
+            // Dropdown list change event.
+            $('#team').change(function () {
+                $('#player option').remove();
+                $.getJSON('/GamePlayer/GetPlayers', { intTeamID: $('#team').val() }, function (data) {
+                    $.each(data, function () {
+                        $('#player').append('<option value=' +
+                          this.Id + '>' + this.LastName + ", " + this.FirstName + '</option>');
+                    });
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    alert('Error getting players 3!');
+                });
+            });
+        });
+
+
+    </script>
 }
+@Scripts.Render("~/bundles/jqueryval")

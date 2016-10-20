@@ -238,6 +238,8 @@
     <Compile Include="Models\GamesIndexData.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ViewPlayers.cs" />
+    <Compile Include="Models\ViewTeam.cs" />
     <Compile Include="Penalty.cs">
       <DependentUpon>RefModel.tt</DependentUpon>
     </Compile>
