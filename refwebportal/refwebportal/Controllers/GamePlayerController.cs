@@ -40,17 +40,27 @@ namespace refwebportal.Controllers
             return View(gamePlayer);
         }
 
-        public ActionResult GetTeams()
+        public ActionResult GetGames()
         {
-            var teams = from b in db.Teams
+            var games = from b in db.Games
+                        select new ViewGame()
+                        {
+                            Id = b.Id,
+                            Description = b.Description,
+                            GameDateTime = b.GameDateTime
+                        };
+            return Json(games, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetTeams(int? intGameID)
+        {
+            var teams = from b in db.GameTeams.Where(p => p.GameId == intGameID )
                         select new ViewTeam()
                         {
-                            TeamName = b.Name,
+                            TeamName = b.Team.Name,
                             Id = b.Id
                         };
-
             return Json(teams, JsonRequestBehavior.AllowGet);
-
         }
 
         public ActionResult GetPlayers(int? intTeamID)
@@ -61,8 +71,7 @@ namespace refwebportal.Controllers
                               Id = b.Id,
                               FirstName = b.FirstName,
                               LastName = b.LastName,
-                              TeamId = b.TeamId,   
-                         
+                              TeamId = b.TeamId,                   
                           };
             //var players = db.Players.Where(p => p.TeamId == intTeamID);
             return Json(players, JsonRequestBehavior.AllowGet);
@@ -72,8 +81,8 @@ namespace refwebportal.Controllers
         public ActionResult Create()
         {
             var intTeamId = 1;
-
             ViewBag.GameId = new SelectList(db.Games, "Id", "Description");
+            ViewBag.GameTeamId = new SelectList(db.GameTeams.Where(p => p.GameId == intTeamId), "Id", "Team.Name");
             ViewBag.PlayerId = new SelectList(db.Players.Where(p => p.TeamId == intTeamId), "Id", "FullName");
             return View();
         }
@@ -85,15 +94,14 @@ namespace refwebportal.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "Id,PlayerId,GameId,IsCaptain,SquadNumber")] GamePlayer gamePlayer)
         {
-            
             if (ModelState.IsValid)
             {
                 db.GamePlayers.Add(gamePlayer);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-
             ViewBag.GameId = new SelectList(db.Games, "Id", "Description", gamePlayer.GameId);
+           // ViewBag.GameTeamId = new SelectList(db.GameTeams, "Id", "Team.Name", gamePlayer.GameTeamId);
             ViewBag.PlayerId = new SelectList(db.Players, "Id", "FullName", gamePlayer.PlayerId);
             return View(gamePlayer);
         }

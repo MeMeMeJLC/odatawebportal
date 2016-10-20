@@ -9,60 +9,60 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            // Get a list of categories and a list of products of the first category.
-            $.getJSON('/GamePlayer/GetTeams', null, function (data) {
+
+            $.getJSON('/GamePlayer/GetGames', null, function (data) {
                 $.each(data, function () {
-                    $('#team').append('<option value=' +
-                      this.Id + '>' + this.Id + " " + this.TeamName + '</option>');
+                    $('#game.form-control').append('<option value=' + this.Id + '>' + this.Description + '</option>');
                 });
-                $.getJSON('/GamePlayer/GetPlayers', { intTeamID: $('#team').val() }, function (data) {
-                    $.each(data, function () {
-                        $('#PlayerId.form-control').append('<option value=' +
-                          this.Id + '>' + this.Id + " " + this.LastName + ", " + this.FirstName + '</option>');
 
+                // Get a list of categories and a list of products of the first category.
+                $.getJSON('/GamePlayer/GetTeams', { intGameID: $('#game').val() }, function (data) {
+                    $.each(data, function () {
+                        $('#team.form-control').append('<option value=' + this.Id + '>' + this.Id + " " + this.TeamName + '</option>');
+                    });
+
+                    $.getJSON('/GamePlayer/GetPlayers', { intTeamID: $('#team').val() }, function (data) {
+                        $.each(data, function () {
+                            $('#PlayerId.form-control').append('<option value=' + this.Id + '>' + this.Id + " " + this.LastName + ", " + this.FirstName + '</option>');
+                        });
+                    }).fail(function (jqXHR, textStatus, errorThrown) {
+                        alert('Error getting players 1!');
                     });
                 }).fail(function (jqXHR, textStatus, errorThrown) {
-                    alert('Error getting players 1!');
+                    alert('Error getting teams 2!');
                 });
-            }).fail(function (jqXHR, textStatus, errorThrown) {
-                alert('Error getting teams 2!');
-            });
 
-            // Dropdown list change event.
-            $('#team.form-control').change(function () {
-                $('#PlayerId.form-control option').remove();
-                $.getJSON('/GamePlayer/GetPlayers', { intTeamID: $('#team').val() }, function (data) {
-                    $.each(data, function () {
-                        $('#PlayerId.form-control').append('<option value=' +
-                          this.Id + '>' + this.LastName + ", " + this.FirstName + '</option>');
-                        //window.alert(this.Id);
+                // Dropdown list change event.
+                $('#game.form-control').change(function () {
+                    $('#TeamId.form-control option').remove();
+                    $.getJSON('/GamePlayer/GetTeams', { intGameID: $('#game').val() }, function (data) {
+
+                        $.each(data, function () {
+                            $('#TeamId.form-control').append('<option value=' + this.Id + '>' + this.Id + " " + this.TeamName + '</option>');
+                        });
+                        window.alert("game changer");
+
                     });
-                }).fail(function (jqXHR, textStatus, errorThrown) {
-                    alert('Error getting players 3!');
                 });
-            });
 
-
-        });
-       /* window.onload = function () {
-            document.getElementById('send').onclick = function (e) {
-                alert("playerid= " + document.getElementById("player").value + ", teamid = " + document.getElementById('team').value);
-                return false;
-            }
-        }*/
-
+                $('#team.form-control').change(function () {
+                            $('#PlayerId.form-control option').remove();
+                            $.getJSON('/GamePlayer/GetPlayers', { intTeamID: $('#team').val() }, function (data) {
+                                $.each(data, function () {
+                                    $('#PlayerId.form-control').append('<option value=' + this.Id + '>' + this.LastName + ", " + this.FirstName + '</option>');
+                                });
+                                 window.alert("team changer");
+                            }).fail(function (jqXHR, textStatus, errorThrown) {
+                                alert('Error getting players 3!');
+                            });
+                        });
+                    });
+                })
     </script>
 }
 
-<h2>Create</h2>
+<h2>Create Game Player</h2>
 
-<div class="form-group">
-    <label for="team" class="control-label col-md-2">Team</label>
-
-    <div class="col-md-10">
-        <select class="form-control" id="team"></select>
-    </div>
-</div>
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
@@ -72,18 +72,26 @@
         <hr />
 
         <div class="form-group">
-            <label for="PlayerId" class="control-label col-md-2" >Player</label>
+            <label for="game" class="control-label col-md-2">Game</label>
+
             <div class="col-md-10">
-                @Html.DropDownList("PlayerId", null, htmlAttributes: new { @class = "form-control" })
+                <select class="form-control" id="game"></select>
+
             </div>
         </div>
 
+        <div class="form-group">
+            <label for="team" class="control-label col-md-2">Team</label>
+            <div class="col-md-10">
+                <select class="form-control" id="team"></select> 
+
+            </div>
+        </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.GameId, "GameId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <label for="PlayerId" class="control-label col-md-2" >Player</label>
             <div class="col-md-10">
-                @Html.DropDownList("GameId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.GameId, "", new { @class = "text-danger" })
+                @Html.DropDownList("PlayerId", null, htmlAttributes: new { @class = "form-control" })
             </div>
         </div>
 

@@ -29,9 +29,11 @@ namespace refwebportal
         public int GameId { get; set; }
         public bool IsCaptain { get; set; }
         public int SquadNumber { get; set; }
+        public int GameTeamId { get; set; }
     
         public virtual Game Game { get; set; }
-        //public virtual Team Team { get; set; }
+        public virtual GameTeam GameTeam { get; set; }
+        public virtual ICollection<Team> Teams { get; set; }
         public virtual Player Player { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Goal> Goals { get; set; }
