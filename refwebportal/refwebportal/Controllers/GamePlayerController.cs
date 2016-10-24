@@ -112,7 +112,7 @@ namespace refwebportal.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.GameId = new SelectList(db.Games, "Id", "Description", gamePlayer.GameId);
-            ViewBag.GameTeamId = new SelectList(db.GameTeams, "Id", "Team.Name", gamePlayer.GameTeamId);
+            //ViewBag.GameTeamId = new SelectList(db.GameTeams, "Id", "Team.Name", gamePlayer.GameTeamId);
             ViewBag.PlayerId = new SelectList(db.Players, "Id", "FullName", gamePlayer.PlayerId);
             return View(gamePlayer);
         }
