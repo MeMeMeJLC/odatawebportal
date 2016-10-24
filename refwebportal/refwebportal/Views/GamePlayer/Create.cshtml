@@ -35,14 +35,13 @@
                 // Dropdown list change event.
                 $('#game.form-control').change(function () {
                     $('#TeamId.form-control option').remove();
-                    $.each(data, function () {
-                        $('#gamemessage').empty();
-                    });
                     $.getJSON('/GamePlayer/GetTeamsForPara', { intGameID: $('#game').val() }, function (data) {
 
                         $.each(data, function () {
-                            $('#gamemessage').append("<br>"+this.TeamName+"<br>");
+                            $('#gamemessage').append('<option value=' + this.Id + '>' + this.Id + " " + this.TeamName + '</option>');
                         });
+                        window.alert("game changer");
+
                     });
                 });
 
@@ -52,6 +51,7 @@
                         $.each(data, function () {
                             $('#PlayerId.form-control').append('<option value=' + this.Id + '>' + this.LastName + ", " + this.FirstName + '</option>');
                         });
+                        window.alert("team changer");
                     }).fail(function (jqXHR, textStatus, errorThrown) {
                         alert('Error getting players 3!');
                     });
